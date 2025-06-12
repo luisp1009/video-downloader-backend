@@ -33,7 +33,6 @@ def download():
 
         response = send_file(filename, as_attachment=True, download_name="video.mp4")
 
-        # Optional: clean up the file after download
         @response.call_on_close
         def cleanup():
             try:

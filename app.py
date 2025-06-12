@@ -1,9 +1,12 @@
 from flask import Flask, request, send_file
-import yt_dlp
+from flask_cors import CORS
 import os
+import yt_dlp
 import uuid
 
+
 app = Flask(__name__)
+CORS(app)  # Allow cross-origin requests
 
 @app.route("/download", methods=["POST"])
 def download():

@@ -1,6 +1,7 @@
 Flask
 yt-dlp
 gunicorn
+flask-cors
 
 
 

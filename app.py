@@ -5,7 +5,7 @@ import uuid
 import os
 
 app = Flask(__name__)
-CORS(app)  # Allow cross-origin requests from Netlify or other frontends
+CORS(app)  # Allow requests from other domains (like Netlify)
 
 @app.route("/")
 def home():
@@ -25,8 +25,7 @@ def download():
         ydl_opts = {
             'outtmpl': filename,
             'format': 'bestvideo+bestaudio/best',
-            'merge_output_format': 'mp4',
-            'cookiefile': 'youtube_cookies.txt'  # Load your browser-exported cookies
+            'merge_output_format': 'mp4'
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -34,7 +33,7 @@ def download():
 
         response = send_file(filename, as_attachment=True, download_name="video.mp4")
 
-        # Automatically delete the file after the response is sent
+        # Optional: clean up the file after download
         @response.call_on_close
         def cleanup():
             try:
